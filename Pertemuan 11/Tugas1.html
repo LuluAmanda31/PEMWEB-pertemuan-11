@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Mahasiswa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8b8ff 0%, #b164ff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        #fotoProfil {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #aebaed;
+            transition: transform 0.3s ease;
+        }
+
+        #fotoProfil:hover {
+            transform: scale(1.05);
+        }
+
+        .biodata-info {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #f9ae70;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #a639d5 0%, #c099e8 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(242, 188, 70, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #cc2ade 0%, #eb94e3 100%);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 241, 243, 0.4);
+        }
+
+        .btn-toggle {
+            background: linear-gradient(135deg, #c0ddf5 0%, #0059ff 100%);
+            color: white;
+            grid-column: 1 / -1;
+        }
+
+        .btn-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 182, 255, 0.4);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section">
+            <div class="profile-img-container">
+                <img id="fotoProfil" src="c:\Users\lulua\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalState\sessions\689D577F8526C6BD6E359C37A98067ABC63DE921\transfers\2025-50\WhatsApp Image 2025-12-10 at 11.11.55.jpeg" alt="Foto Profil">
+            </div>
+        </div>
+
+        <div id="biodataSection" class="biodata-info">
+            <div class="info-item">
+                <div class="info-label">Nama Lengkap</div>
+                <div id="nama" class="info-value">Lulu Amanda</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">NIM</div>
+                <div id="nim" class="info-value">0110125017</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Program Studi</div>
+                <div id="prodi" class="info-value">Sistem Informasi</div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-primary" onclick="ubahNama()">Ubah Nama</button>
+            <button class="btn-primary" onclick="ubahProdi()">Ubah Prodi</button>
+            <button class="btn-secondary" onclick="gantiGambar()">Ganti Foto</button>
+            <button class="btn-toggle" onclick="toggleBiodata()">Sembunyikan Biodata</button>
+        </div>
+
+        <input type="file" id="inputFile" accept="image/*" onchange="uploadFoto()">
+    </div>
+
+    <script>
+        function ubahNama() {
+            var namaBaru = prompt("Masukkan nama baru:");
+            if (namaBaru !== null && namaBaru.trim() !== "") {
+                var elementNama = document.getElementById("nama");
+                elementNama.innerHTML = namaBaru;
+            }
+        }
+        function ubahProdi() {
+            var prodiBaru = prompt("Masukkan program studi baru:");
+            if (prodiBaru !== null && prodiBaru.trim() !== "") {
+                var elementProdi = document.getElementById("prodi");
+                elementProdi.innerHTML = prodiBaru;
+            }
+        }
+        function gantiGambar() {
+            var inputFile = document.getElementById("inputFile");
+            inputFile.click();
+        }
+        function uploadFoto() {
+            var inputFile = document.getElementById("inputFile");
+            var file = inputFile.files[0];
+            
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var fotoProfil = document.getElementById("fotoProfil");
+                    fotoProfil.setAttribute("src", e.target.result);
+                    fotoProfil.setAttribute("alt", "Foto Profil Baru");
+                    fotoProfil.style.opacity = "0";
+                    setTimeout(function() {
+                        fotoProfil.style.transition = "opacity 0.5s ease";
+                        fotoProfil.style.opacity = "1";
+                    }, 100);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+        var biodataVisible = true;
+        function toggleBiodata() {
+            var biodataSection = document.getElementById("biodataSection");
+            var toggleButton = document.querySelector(".btn-toggle");
+            
+            if (biodataVisible) {
+                biodataSection.style.display = "none";
+                toggleButton.innerHTML = "Tampilkan Biodata";
+                toggleButton.style.background = "linear-gradient(135deg, #fa709a 0%, #fee140 100%)";
+                biodataVisible = false;
+            } else {
+                biodataSection.style.display = "block";
+                toggleButton.innerHTML = "Sembunyikan Biodata";
+                toggleButton.style.background = "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)";
+                biodataVisible = true;
+            }
+        }
+        window.onload = function() {
+            var container = document.querySelector(".container");
+            container.style.opacity = "0";
+            container.style.transform = "translateY(20px)";
+            
+            setTimeout(function() {
+                container.style.transition = "all 0.5s ease";
+                container.style.opacity = "1";
+                container.style.transform = "translateY(0)";
+            }, 100);
+        }
+    </script>
+</body>
+</html>
